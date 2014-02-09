@@ -5,6 +5,30 @@
 
 #define MAX_CMD 100
 
+/* For interfacing the below config 
+    LCD JHD 162A
+   ==================
+  | PIN     | GPIO   |
+  |---------+--------|      
+  | 01      | Vdd    |
+  | 02      | Vss    |
+  | 03      |  -     |
+  | 04 RS   | GPIO_8 | GPIO_66
+  | 05 R/W  | GND    | GPIO_67 [Write after init]
+  | 06 E    | GPIO_9 | GPIO_68
+  | 07      | GPIO_70|
+  | 08      | GPIO_71|
+  | 09      | GPIO_72|
+  | 10      | GPIO_73|
+  | 11      | GPIO_74|
+  | 12      | GPIO_75|
+  | 13      | GPIO_76|
+  | 14      | GPIO_77|
+  | 15  LED+|        |
+  | 16  LED-|        |
+   ------------------
+*/
+
 void pins_init(char * pin_conf[], int size)
 {
      int i = 0;
