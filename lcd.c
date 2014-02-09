@@ -35,7 +35,8 @@ void pins_init(char * pin_conf[], int size)
      static char cmd[MAX_CMD];
      static char buf[10];
      char * c; char * tmp;
-     for( i = 0 ; i < size ; i++) {
+     for( i = 0 ; i < size ; i++) 
+     {
 	  strncpy(buf, pin_conf[i], 10);
 	  c = strtok(buf, "_");
 	  if(c != NULL) {
@@ -58,6 +59,31 @@ void pins_init(char * pin_conf[], int size)
 #endif
      }
 }
+
+void pins_deinit(char * pin_conf[], int size)
+{
+     int i = 0;
+     static char cmd[MAX_CMD];
+     static char buf[10];
+     char * c; char * tmp;
+     for( i = 0 ; i < size ; i++) 
+     {
+	  strncpy(buf, pin_conf[i], 10);
+	  c = strtok(buf, "_");
+	  if(c != NULL) {
+	       tmp = strtok(NULL, "_");
+	       sprintf(cmd, "echo %s > /sys/class/gpio/unexport", tmp);
+
+#ifdef BEAGLEBONE
+	       system(cmd);
+#endif
+	  }
+#ifdef DEBUG
+	  printf("\n %s", cmd);
+#endif
+     }
+}
+
 
 int jhd_162A_init()
 {
